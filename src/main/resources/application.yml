@@ -15,7 +15,7 @@ spring:
 # GraphQL settings
   graphql:
     graphiql:
-      enabled: true
+      enabled: false
       path: /graphiql
     schema:
       printer:
