@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
+@SuppressWarnings("unused")
 public class BookController {
 
     @Autowired
@@ -22,12 +23,22 @@ public class BookController {
         return bookRepository.findByAuthor(author);
     }
 
-//    @QueryMapping
-//    public List<BookEntity> booksByAuthor(@Argument String author) {
-//        System.out.println("the author " + author);
-//        return bookRepository.findByAuthor(author);
-//    }
-//
+    @QueryMapping
+    public List<BookEntity> findAllBooks(){
+        System.out.println("the all books" );
+        return bookRepository.findAll();
+    }
+
+    @QueryMapping
+    public List<BookEntity> findBookByTitle(@Argument String title){
+        return bookRepository.findByTitleContaining(title);
+    }
+
+    @QueryMapping
+    public BookEntity findBookByBookId(@Argument Long bookId){
+        return bookRepository.findById(bookId).orElseThrow(()-> new RuntimeException("No found"));
+    }
+
     @MutationMapping
     public BookEntity addBook(@Argument String title,
                         @Argument String author,
