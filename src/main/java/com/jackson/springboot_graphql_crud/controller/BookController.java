@@ -48,5 +48,19 @@ public class BookController {
         return bookRepository.save(book);
     }
 
+    @MutationMapping
+    public BookEntity updateBook(@Argument Long bookId,
+                                 @Argument String title,
+                                 @Argument String author,
+                                 @Argument Integer pages,
+                                 @Argument String isBn){
+        BookEntity book = bookRepository.findById(bookId).orElseThrow(()-> new RuntimeException("Not found"));
+        if (title!= null) book.setTitle(title);
+        if (author != null) book.setAuthor(author);
+        if (pages != null) book.setPages(pages);
+        if (isBn != null) book.setIsbn(isBn);
+        return bookRepository.save(book);
+    }
+
 
 }
