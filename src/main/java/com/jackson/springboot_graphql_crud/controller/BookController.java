@@ -62,5 +62,10 @@ public class BookController {
         return bookRepository.save(book);
     }
 
+    @MutationMapping
+    public Boolean deleteBook(@Argument Long bookId){
+        bookRepository.deleteById(bookId);
+        return true;
+    }
 
 }
